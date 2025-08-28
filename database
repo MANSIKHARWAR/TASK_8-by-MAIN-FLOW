@@ -1,0 +1,36 @@
+-- Buyers Table
+CREATE TABLE buyers (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    phone VARCHAR(15),
+    address TEXT,
+    registration_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Products Table
+CREATE TABLE products (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    category VARCHAR(50),
+    price DECIMAL(10,2),
+    stock INT,
+    description TEXT,
+    supplier VARCHAR(100),
+    image VARCHAR(255)
+);
+
+-- Transactions Table
+CREATE TABLE transactions (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    buyer_id INT,
+    product_id INT,
+    transaction_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    quantity INT,
+    total_amount DECIMAL(10,2),
+    payment_method VARCHAR(50),
+    status VARCHAR(20),
+    notes TEXT,
+    FOREIGN KEY (buyer_id) REFERENCES buyers(id),
+    FOREIGN KEY (product_id) REFERENCES products(id)
+);
